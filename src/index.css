@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-black text-white;
+}
+
+/* Custom styles for high-fidelity look */
+.glass {
+  @apply bg-white bg-opacity-5 backdrop-blur-lg border border-white border-opacity-10;
+}
+
+.electric-glow {
+  box-shadow: 0 0 20px rgba(0, 51, 255, 0.3);
+}
