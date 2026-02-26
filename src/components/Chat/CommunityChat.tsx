@@ -197,7 +197,7 @@ export const CommunityChat: React.FC = () => {
                         {showLogs ? 'Masquer Diag' : 'Diag Master'}
                     </button>
                     <span className="text-[10px] text-gray-700 font-bold uppercase tracking-tighter">
-                        {user ? 'Google Auth' : 'Guest Mode'}
+                        {user ? 'Auth Google' : 'Mode Invité'}
                     </span>
                 </div>
             </div>

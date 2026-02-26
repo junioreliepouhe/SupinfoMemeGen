@@ -102,7 +102,7 @@ function MainApp() {
                                     </div>
                                 )}
                                 <div className="hidden sm:block">
-                                    <p className="text-[9px] text-gray-600 font-bold uppercase leading-none mb-1 tracking-widest">{user ? 'Google Master' : 'Ghost Runner'}</p>
+                                    <p className="text-[9px] text-gray-600 font-bold uppercase leading-none mb-1 tracking-widest">{user ? 'Maître Google' : 'Invité Fantôme'}</p>
                                     <p className="text-xs font-black truncate max-w-[120px] tracking-tight">{user?.displayName || guestName}</p>
                                 </div>
                             </div>
