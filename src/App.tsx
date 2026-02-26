@@ -169,6 +169,8 @@ function MainApp() {
             {/* Toggle Button for Desktop */}
             <button
                 onClick={() => setShowChat(!showChat)}
+                title={showChat ? "Masquer le chat" : "Afficher le chat"}
+                aria-label={showChat ? "Masquer le chat" : "Afficher le chat"}
                 className={`fixed top-1/2 -translate-y-1/2 right-0 bg-gray-950 border border-gray-900 border-r-0 p-3 rounded-l-2xl transition-all z-50 hover:bg-gray-900 hover:border-electric-blue/40 group ${showChat ? 'mr-[448px]' : 'mr-0'}`}
             >
                 {showChat ? <ChevronRight size={20} className="text-electric-blue group-hover:scale-125 transition-transform" /> : <ChevronLeft size={20} className="text-electric-blue group-hover:scale-125 transition-transform" />}

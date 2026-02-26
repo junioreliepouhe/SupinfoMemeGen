@@ -291,8 +291,8 @@ export const CommunityChat: React.FC = () => {
 
                                     {msg.senderId === currentId && !editingId && (
                                         <div className="absolute -left-16 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
-                                            <button onClick={() => startEdit(msg)} className="p-1 text-gray-700 hover:text-electric-blue transition-all" title="Modifier Master"><Edit2 size={12} /></button>
-                                            <button onClick={() => deleteMessage(msg.id)} className="p-1 text-gray-700 hover:text-red-500 transition-all" title="Supprimer Master"><Trash2 size={12} /></button>
+                                            <button onClick={() => startEdit(msg)} className="p-1 text-gray-700 hover:text-electric-blue transition-all" title="Modifier ce message" aria-label="Modifier ce message"><Edit2 size={12} /></button>
+                                            <button onClick={() => deleteMessage(msg.id)} className="p-1 text-gray-700 hover:text-red-500 transition-all" title="Supprimer ce message" aria-label="Supprimer ce message"><Trash2 size={12} /></button>
                                         </div>
                                     )}
                                 </div>
