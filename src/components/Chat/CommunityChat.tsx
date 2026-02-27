@@ -167,7 +167,7 @@ export const CommunityChat: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col h-screen bg-black border-l border-gray-950 w-full max-w-md">
+        <div className="flex flex-col h-full bg-black border-l border-gray-950 w-full max-w-md">
             {/* Header du Chat */}
             <div className="p-4 border-b border-gray-950 flex items-center justify-between bg-black z-10 shadow-xl shadow-black/50">
                 <div className="flex items-center gap-3">
