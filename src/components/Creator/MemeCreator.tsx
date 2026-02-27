@@ -125,6 +125,7 @@ export const MemeCreator: React.FC<MemeCreatorProps> = ({
     const [bottomPos, setBottomPos] = useState({ x: 50, y: 90 });
     const [category, setCategory] = useState('Général');
     const [customCategory, setCustomCategory] = useState('');
+    const [isPrivate, setIsPrivate] = useState(false);
     const [existingCategories, setExistingCategories] = useState<string[]>(['Général', 'Travail', 'Privé', 'Humour']);
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -621,6 +622,7 @@ export const MemeCreator: React.FC<MemeCreatorProps> = ({
                 authorName,
                 authorId,
                 authorPhoto,
+                isPrivate: isPrivate,
                 createdAt: serverTimestamp()
             });
 
@@ -1061,6 +1063,17 @@ export const MemeCreator: React.FC<MemeCreatorProps> = ({
                                 />
                             </motion.div>
                         )}
+                    </div>
+                </div>
+
+                <div className="flex items-center gap-3 py-4 border-t border-gray-900">
+                    <label className="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" className="sr-only peer" checked={isPrivate} onChange={(e) => setIsPrivate(e.target.checked)} />
+                        <div className="w-11 h-6 bg-gray-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-electric-blue"></div>
+                    </label>
+                    <div>
+                        <p className="text-sm font-bold text-white">Galerie Privée</p>
+                        <p className="text-[10px] text-gray-500 uppercase tracking-widest font-bold">Seul vous pourrez voir ce mème</p>
                     </div>
                 </div>
 

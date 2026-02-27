@@ -15,6 +15,7 @@ interface Meme {
     authorName?: string;
     authorId?: string;
     authorPhoto?: string;
+    isPrivate?: boolean;
     createdAt: any;
 }
 
@@ -63,17 +64,7 @@ export const MemeGallery: React.FC<MemeGalleryProps> = ({ onEdit }) => {
                 likes: increment(1)
             });
         } catch (error) {
-            console.error("Erreur lors du like:", error);
-        }
-    };
-
-    const handleDelete = async (memeId: string) => {
-        if (!window.confirm("Voulez-vous vraiment supprimer ce mème de la galerie ?")) return;
-        try {
-            await deleteDoc(doc(db, 'memes', memeId));
-        } catch (error) {
-            console.error("Erreur de suppression:", error);
-            alert("Impossible de supprimer le mème.");
+            console.error("Erreur de like:", error);
         }
     };
 
@@ -97,6 +88,11 @@ export const MemeGallery: React.FC<MemeGalleryProps> = ({ onEdit }) => {
     };
 
     const filteredMemes = memes.filter(meme => {
+        // Filtrer les mèmes privés
+        if (meme.isPrivate && meme.authorId !== currentId) {
+            return false;
+        }
+
         const matchesSearch =
             (meme.topText?.toLowerCase().includes(searchQuery.toLowerCase())) ||
             (meme.bottomText?.toLowerCase().includes(searchQuery.toLowerCase())) ||
@@ -218,6 +214,11 @@ export const MemeGallery: React.FC<MemeGalleryProps> = ({ onEdit }) => {
                                     </div>
 
                                     <div className="flex items-center gap-4">
+                                        {meme.isPrivate && (
+                                            <div className="flex items-center gap-1 text-red-400 text-[9px] uppercase font-bold tracking-widest bg-red-500/10 px-2 py-1 rounded-lg border border-red-500/20">
+                                                Privé
+                                            </div>
+                                        )}
                                         <div className="flex items-center gap-1.5 text-gray-500 text-[9px] uppercase font-bold tracking-widest bg-gray-950 px-2 py-1 rounded-lg border border-gray-900">
                                             <Folder size={10} className="text-electric-blue" />
                                             {meme.category || 'Général'}
@@ -236,25 +237,32 @@ export const MemeGallery: React.FC<MemeGalleryProps> = ({ onEdit }) => {
                                 <div className="flex gap-2 pt-2 border-t border-gray-800/50 mt-2">
                                     <button
                                         onClick={() => handleShare(meme)}
-                                        className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gray-900 border border-gray-800 text-gray-400 text-[10px] font-bold uppercase hover:text-white hover:bg-gray-800 transition-all font-black tracking-widest"
+                                        className="flex-1 flex flex-col items-center justify-center gap-1 py-2 rounded-xl bg-gray-900 border border-gray-800 text-gray-400 hover:text-white hover:bg-gray-800 transition-all"
                                     >
-                                        <Share2 size={12} /> Partager
+                                        <Share2 size={14} />
+                                        <span className="text-[8px] font-black uppercase tracking-widest">Partager</span>
                                     </button>
                                     <button
                                         onClick={() => onEdit(meme)}
-                                        className="p-2.5 rounded-xl bg-gray-900 border border-gray-800 text-gray-500 hover:text-electric-blue hover:bg-gray-800 transition-all"
-                                        title="Modifier ce mème"
-                                        aria-label="Modifier ce mème"
+                                        className="flex-1 flex flex-col items-center justify-center gap-1 py-2 rounded-xl bg-gray-900 border border-gray-800 text-gray-400 hover:text-electric-blue hover:bg-gray-800 transition-all"
                                     >
                                         <Edit size={14} />
+                                        <span className="text-[8px] font-black uppercase tracking-widest">Modifier</span>
                                     </button>
                                     <button
-                                        onClick={() => handleDelete(meme.id)}
-                                        className="p-2.5 rounded-xl bg-gray-900 border border-gray-800 text-gray-500 hover:text-red-500 hover:bg-gray-800 transition-all"
-                                        title="Supprimer ce mème"
-                                        aria-label="Supprimer ce mème"
+                                        onClick={async () => {
+                                            if(window.confirm("Êtes-vous sûr de vouloir supprimer ce mème ?")) {
+                                                try {
+                                                    await deleteDoc(doc(db, 'memes', meme.id));
+                                                } catch(e) {
+                                                    alert("Erreur: Vous n'avez pas l'autorisation de supprimer ce mème.");
+                                                }
+                                            }
+                                        }}
+                                        className="flex-1 flex flex-col items-center justify-center gap-1 py-2 rounded-xl bg-gray-900 border border-gray-800 text-gray-400 hover:text-red-500 hover:bg-gray-800 transition-all"
                                     >
                                         <Trash2 size={14} />
+                                        <span className="text-[8px] font-black uppercase tracking-widest">Supprimer</span>
                                     </button>
                                 </div>
                             </div>
