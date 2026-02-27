@@ -119,7 +119,7 @@ function MainApp() {
                     </div>
                 </header>
 
-                <main className="flex-1 overflow-y-auto p-4 pb-24 md:p-12 md:pb-12 custom-scrollbar bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-electric-blue/5 via-black to-black">
+                <main className="flex-1 overflow-y-auto p-4 pb-32 md:p-12 md:pb-12 custom-scrollbar bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-electric-blue/5 via-black to-black">
                     <div className="max-w-7xl mx-auto h-full flex flex-col">
                         <AnimatePresence mode="wait">
                             {activeTab === 'creator' && (
@@ -128,6 +128,7 @@ function MainApp() {
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: 20 }}
+                                    className="pb-10"
                                 >
                                     <MemeCreator
                                         editData={editingMeme}
@@ -143,6 +144,7 @@ function MainApp() {
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 1.05 }}
+                                    className="pb-10"
                                 >
                                     <MemeGallery onEdit={handleEditMeme} />
                                 </motion.div>
@@ -153,7 +155,7 @@ function MainApp() {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: 20 }}
-                                    className="flex-1 h-[calc(100vh-140px)] lg:hidden"
+                                    className="flex-1 h-[calc(100dvh-180px)] lg:hidden"
                                 >
                                     <CommunityChat />
                                 </motion.div>

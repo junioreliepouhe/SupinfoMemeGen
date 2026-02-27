@@ -304,7 +304,7 @@ export const CommunityChat: React.FC = () => {
             </div>
 
             {/* Input de message : Ouvert à tous (Google ou Guest) */}
-            <div className="p-4 border-t border-gray-950 bg-black/40 backdrop-blur-md">
+            <div className="p-4 pb-24 lg:pb-4 border-t border-gray-950 bg-black/40 backdrop-blur-md">
                 {(user || isGuest) ? (
                     <form onSubmit={sendMessage} className="relative flex gap-2">
                         <input
