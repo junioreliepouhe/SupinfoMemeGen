@@ -38,6 +38,26 @@ function MainApp() {
         setActiveTab('creator');
     };
 
+    const handleQuit = () => {
+        const choice = window.confirm(
+            "Voulez-vous fermer l'application ?\n\n" +
+            "OK = Fermer l'onglet (si le navigateur le permet)\n" +
+            "Annuler = Changer d'utilisateur / Se déconnecter"
+        );
+
+        if (choice) {
+            // Tenter de fermer la fenêtre
+            // Note: Les navigateurs modernes bloquent souvent window.close() si le script n'a pas ouvert la fenêtre
+            window.close();
+            
+            // Plan de secours : Si la fenêtre ne se ferme pas, on remplace le contenu par un écran noir
+            document.body.innerHTML = '<div style="height: 100vh; width: 100vw; background-color: black; color: white; display: flex; align-items: center; justify-content: center; font-family: sans-serif; flex-direction: column;"><h1>Application Fermée</h1><p style="color: gray;">Vous pouvez maintenant fermer cet onglet en toute sécurité.</p></div>';
+        } else {
+            // Changer d'utilisateur
+            logout();
+        }
+    };
+
     if (loading) return (
         <div className="min-h-screen bg-black flex items-center justify-center">
             <div className="w-16 h-16 border-4 border-electric-blue border-t-transparent rounded-full animate-spin shadow-[0_0_20px_rgba(0,255,255,0.3)]"></div>
@@ -79,7 +99,7 @@ function MainApp() {
                         icon={<LogOut size={20} />}
                         label="Quitter"
                         active={false}
-                        onClick={logout}
+                        onClick={handleQuit}
                     />
                 </div>
             </div>
@@ -179,7 +199,7 @@ function MainApp() {
                     <MessageSquare size={20} />
                     <span className="text-[10px] uppercase font-bold">Chat</span>
                 </button>
-                <button onClick={logout} className="flex flex-col items-center gap-1 text-gray-500">
+                <button onClick={handleQuit} className="flex flex-col items-center gap-1 text-gray-500">
                     <LogOut size={20} />
                     <span className="text-[10px] uppercase font-bold">Quitter</span>
                 </button>
